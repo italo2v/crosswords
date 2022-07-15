@@ -1,0 +1,56 @@
+
+<html>
+<head>
+  <title data-translate="authenticated"></title>
+  <link rel="stylesheet" type="text/css" href="./css/style.css">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <style>
+    body{
+      background-color: #003571;
+    }
+    .panel {
+      background-color: #abf1ff;
+      border: 1px solid #6faaff;
+    }
+    .dropdown-inline {
+      display: inline-block;
+      position: relative;
+    }
+    .btn-primary span{
+      color: #fff;
+    }
+  </style>
+  <script src='./js/jquery-3.5.1.min.js'></script>
+  <script src="./js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div class="panel" style="text-align:center;">
+
+
+  <span data-translate="authenticated"></span>
+
+  <BR>
+<span data-translate="closewindow"></span>
+
+</div>
+<script>
+window.onload = () => {
+  var datalanguage
+  $.get('getlanguage', function(data){
+    datalanguage = data
+    translate()
+  })
+  //replaces all language text
+  function translate(){
+      $("[data-translate]").each(function(){
+      var key = $(this).data('translate')
+      if($(this).is('input'))
+        $(this).attr('value', datalanguage[key])
+      else
+        $(this).html(datalanguage[key] || "N/A")
+      });
+  }
+}
+</script>
+</body>
+</html>
