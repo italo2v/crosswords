@@ -1,0 +1,256 @@
+body {
+    font-family: helvetica neue,Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    color: #003571;
+    background-color: #003571;
+}
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, input, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: #003571;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+.panel{
+  margin: 15px;
+  padding: 5px;
+  background-color: #abf1ff;
+  border: 1px solid #6faaff;
+}
+
+#boxProfile span{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#boxProfile input[type=text], #boxProfile input[type=password]{
+  width: 100px;
+}
+
+#menu input, .panel .pull-left input{
+  margin: 5px;
+  background-color: #fff;
+  position: realtive;
+}
+
+#boardPanel, #classPanel, #dictionaryPanel{
+  overflow: scroll;
+}
+
+.panel .pull-left table, .panel .pull-left input{
+  margin: 1px;
+  padding: 1px;
+}
+
+.smallest{
+  width: 15px;
+}
+.small{
+  width: 35px;
+}
+.medium{
+  width: 60px;
+}
+.right{
+  float: right;
+}
+.left{
+  float: left;
+}
+
+#crosswords .game {
+    margin: 45px 0;
+}
+.clearfix, .container {
+    display: block;
+}
+.container {
+    margin: 0 auto;
+}
+.column, div.span-1, div.span-2, div.span-3, div.span-4, div.span-5, div.span-6, div.span-7, div.span-8, div.span-9, div.span-10, div.span-11, div.span-12, div.span-13, div.span-14, div.span-15, div.span-16, div.span-17, div.span-18, div.span-19, div.span-20, div.span-21, div.span-22, div.span-23, div.span-24 {
+    float: left;
+    margin-right: 10px;
+}
+#crosswords .game .grid table {
+    border: 0 solid #6faaff;
+    border-collapse: collapse;
+}
+table {
+    max-width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-left:20px;
+}
+table, td, th {
+    vertical-align: middle;
+}
+#crosswords .game .grid table tbody tr td {
+    background-color: #000944;
+    border: 1px solid #000522;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: default;
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+#crosswords .game .grid table tbody tr td span.number {
+    position: absolute;
+    top: 0px;
+    left: 1px;
+    font-size: 9px;
+    height: 11px;
+    line-height: 11px;
+}
+#crosswords .game .grid table tbody tr td input {
+    font-family: helvetica neue,Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    line-height: 28px;
+    height: 30px;
+    width: 30px;
+    border: 0;
+    text-align: center;
+    padding: 2px;
+    text-transform: uppercase;
+}
+#crosswords .game .grid table tbody tr td input.highlight {
+    background: #ffc;
+}
+#crosswords .game .grid table tbody tr td input:read-only {
+    color: black;
+    font-weight:bold;
+}
+input, textarea {
+    border: 1px solid #6faaff;
+    margin: 0;
+    padding: 1px;
+}
+.last, div.last {
+    margin-right: 0;
+}
+.span-8 {
+    width: 382px;
+    float: left;
+}
+#crosswords .game .clues {
+    padding: 0 18px 18px;
+    background-color: #f4f4f4;
+    height: 200px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+    overflow-y: scroll;
+}
+#crosswords .game .clues strong {
+    display: block;
+    color: gray;
+    font-size: 16px;
+    border-bottom: 1px solid gray;
+    line-height: 34px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+#crosswords .game .clues ul {
+    list-style-type: none;
+    position: relative;
+}
+ul, ol {
+    list-style-position: inside;
+    margin: 0 0 18px;
+}
+font.highlight {
+    color: #ffc;
+}
+#crosswords .game .clues ul li {
+    cursor: pointer;
+    margin-bottom: 6px;
+    padding: 1px 3px;
+}
+#crosswords .game .clues ul li.highlight {
+    background: #ffc;
+    font-weight: 700;
+}
+#crosswords .game .clues ul li.tick{
+  text-decoration: line-through;
+  font-weight:bold;
+  cursor: default;
+}
+.box.panel{
+  z-index: 1;
+  position: absolute;
+  color: #000944;
+  width: 400px;
+  padding: 0;
+  margin:0;
+  display:grid;
+  border-width:3px;
+}
+.box .title input{
+  width: 20px;
+  color: #000944;
+  font-size: 14px;
+}
+.box .title{
+  background-color: #000944;
+  color: #FFF;
+  font-weight: bold;
+  font-size: 18px;
+  height: 28px;
+}
+.box .message{
+  text-align:center;
+  vertical-align: middle;
+  margin: 5px;
+}
+#lock{
+  top:0px;
+  left:0px;
+  z-index: 1;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5)
+}
+.profile{
+    background-size: 32px 32px;
+    border: 1px solid #6faaff;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    margin: 0;
+    position: relative;
+    height: 32px;
+    width: 32px;
+}
+.changePic {
+    background-image: url('../pictures/change_pic.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    height: 32px;
+    width: 32px;
+    opacity: .8;
+    position:absolute;
+}
+.hint{
+  padding:5px;
+  margin: 5px;
+  background-color: #FFD;
+  border: 1px solid #6faaff;
+  text-align:center;
+}
+#systemLanguage ul{
+  max-height:200px;
+  overflow-y:auto;
+}
+.google{
+  background-image: url('../pictures/socials.png');
+  background-position: 0 -61px;
+  cursor:pointer;
+  width: 68px;
+  height: 74px;
+  display: inline-block;
+}
