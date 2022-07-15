@@ -1,0 +1,20 @@
+[
+  { "_id": "62c719b37a5db590a0787012",
+    "admin_password": "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=",
+    "language": "en-US",
+    "max_name_length": 50,
+    "max_clue_length": 200,
+    "board_config": {
+      "max_size": 30,
+      "random_rows": 30,
+      "random_cols": 30,
+      "random_easy_words": 20,
+      "random_medium_words": 30,
+      "random_hard_words": 40,
+      "random_mixed_words": 40,
+      "mixed_max_words_level": 14
+    },
+    "mongo_db": {
+    }
+  }
+]
