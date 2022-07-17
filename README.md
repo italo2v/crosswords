@@ -16,6 +16,10 @@ Users may play created boards or random boards based on dictionaries.
 
 Random boards may be easy, medium, hard and mixed level based on word levels of dictionaries.
 
-Languages Portuguese-BR and English-US (You may play only boards or random boards in your language).
+Languages Portuguese-BR and English-US (Users may play only boards or random boards in your language).
 
 You may translate the software and include in languages.json.
+
+Default Administrator account
+login: admin
+password: 123456
