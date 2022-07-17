@@ -20,6 +20,6 @@ Languages Portuguese-BR and English-US (Users may play only boards or random boa
 
 You may translate the software and include in languages.json.
 
-Default Administrator account
-login: admin
+Default Administrator account -
+login: admin,
 password: 123456
