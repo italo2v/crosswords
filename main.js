@@ -154,14 +154,17 @@ function createWindow () {
     icon: path.join(__dirname, './crossword.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-      nodeIntegration: true
+      nodeIntegration: true,
+      contextIsolation: false,
+      enableRemoteModule: false
     }
   })
 
   // and load the index.html of the app.
   mainWindow.loadFile('./View/index.html')
-  mainWindow.removeMenu()
   mainWindow.webContents.on('did-finish-load', () => {
+    mainWindow.removeMenu()
+    mainWindow.setMenuBarVisibility(false)
     controls.systemConfig.userDataPath = (app || remote.app).getPath('userData')
     controls.systemConfig.appPath = (app || remote.app).getAppPath()
     controls.getSystemConfig('', (config)=>{
