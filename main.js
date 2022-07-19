@@ -1,8 +1,3 @@
-// TODO:
-//criar banco local com importar e exportar dados
-
-
-
 const {app, BrowserWindow, session, dialog} = require('electron')
 const { ipcMain } = require('electron')
 const path = require('path')
