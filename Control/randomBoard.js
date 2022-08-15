@@ -253,25 +253,25 @@ function generateTable(){
           if(table[words[i].first[0]-1] != undefined)
             if(table[words[i].first[0]-1][words[i].first[1]+l] == "#d")
               table[words[i].first[0]-1][words[i].first[1]+l] = "#n"
-            else if(table[words[i].first[0]-1][words[i].first[1]+l] == 0)
+            else if(table[words[i].first[0]-1][words[i].first[1]+l] === 0)
               table[words[i].first[0]-1][words[i].first[1]+l] = "#a"
           table[words[i].first[0]][words[i].first[1]+l] = letter
           if(table[words[i].first[0]+1] != undefined)
             if(table[words[i].first[0]+1][words[i].first[1]+l] == "#d")
               table[words[i].first[0]+1][words[i].first[1]+l] = "#n"
-            else if(table[words[i].first[0]+1][words[i].first[1]+l] == 0)
+            else if(table[words[i].first[0]+1][words[i].first[1]+l] === 0)
               table[words[i].first[0]+1][words[i].first[1]+l] = "#a"
         }else if(words[i].direction == 'down'){
           if(table[words[i].first[0]+l] != undefined && table[words[i].first[0]+l][words[i].first[1]-1] != undefined)
             if(table[words[i].first[0]+l][words[i].first[1]-1] == "#a")
               table[words[i].first[0]+l][words[i].first[1]-1] = "#n"
-            else if(table[words[i].first[0]+l][words[i].first[1]-1] == 0)
+            else if(table[words[i].first[0]+l][words[i].first[1]-1] === 0)
               table[words[i].first[0]+l][words[i].first[1]-1] = "#d"
           table[words[i].first[0]+l][words[i].first[1]] = letter
             if(table[words[i].first[0]+l] != undefined && table[words[i].first[0]+l][words[i].first[1]+1] != undefined)
               if(table[words[i].first[0]+l][words[i].first[1]+1] == "#a")
                 table[words[i].first[0]+l][words[i].first[1]+1] = "#n"
-              else if(table[words[i].first[0]+l][words[i].first[1]+1] == 0)
+              else if(table[words[i].first[0]+l][words[i].first[1]+1] === 0)
                 table[words[i].first[0]+l][words[i].first[1]+1] = "#d"
         }
       }
@@ -281,21 +281,21 @@ function generateTable(){
 function checkTouchWords(){
   generateTable()
   if(word.direction == 'across'){
-    if(!( (table[word.first[0]][word.first[1]] == 0
+    if(!( (table[word.first[0]][word.first[1]] === 0
           || table[word.first[0]][word.first[1]] == word.word[0]
           || table[word.first[0]][word.first[1]] == '#d')
     && (table[word.first[0]][word.first[1]-1] == undefined
-        || table[word.first[0]][word.first[1]-1] == 0
+        || table[word.first[0]][word.first[1]-1] === 0
         || table[word.first[0]][word.first[1]-1] == "#a"
         || table[word.first[0]][word.first[1]-1] == "#d"
         || table[word.first[0]][word.first[1]-1] == "#n") )){
       abort = true
       //console.log('checkTouch: '+word.word+' first char '+word.word[0]+' wrong position '+table[word.first[0]][word.first[1]])
     }
-    else if(!( (table[word.first[0]][word.first[1]+word.word.length-1] == 0
+    else if(!( (table[word.first[0]][word.first[1]+word.word.length-1] === 0
                 || table[word.first[0]][word.first[1]+word.word.length-1] == word.word[word.word.length-1]
                 || table[word.first[0]][word.first[1]+word.word.length-1] == "#d")
-    && (table[word.first[0]][word.first[1]+word.word.length] == 0
+    && (table[word.first[0]][word.first[1]+word.word.length] === 0
         || table[word.first[0]][word.first[1]+word.word.length] == undefined
         || table[word.first[0]][word.first[1]+word.word.length] == "#d"
         || table[word.first[0]][word.first[1]+word.word.length] == "#a"
@@ -305,22 +305,22 @@ function checkTouchWords(){
     }
   }
   else if(word.direction == 'down'){
-    if(!( (table[word.first[0]][word.first[1]] == 0
+    if(!( (table[word.first[0]][word.first[1]] === 0
           || table[word.first[0]][word.first[1]] == word.word[0]
           || table[word.first[0]][word.first[1]] == "#a")
     && (table[word.first[0]-1] == undefined
-        || table[word.first[0]-1][word.first[1]] == 0
+        || table[word.first[0]-1][word.first[1]] === 0
         || table[word.first[0]-1][word.first[1]] == "#a"
         || table[word.first[0]-1][word.first[1]] == "#d"
         || table[word.first[0]-1][word.first[1]] == "#n") )){
       abort = true
       //console.log('checkTouch: '+word.word+' first char '+word.word[0]+' wrong position '+table[word.first[0]][word.first[1]])
     }
-    else if(!( (table[word.first[0]+word.word.length-1][word.first[1]] == 0
+    else if(!( (table[word.first[0]+word.word.length-1][word.first[1]] === 0
                 || table[word.first[0]+word.word.length-1][word.first[1]] == word.word[word.word.length-1]
                 || table[word.first[0]+word.word.length-1][word.first[1]] == "#a")
     && (table[word.first[0]+word.word.length] == undefined
-        || table[word.first[0]+word.word.length][word.first[1]] == 0
+        || table[word.first[0]+word.word.length][word.first[1]] === 0
         || table[word.first[0]+word.word.length][word.first[1]] == "#a"
         || table[word.first[0]+word.word.length][word.first[1]] == "#d"
         || table[word.first[0]+word.word.length][word.first[1]] == "#n") )){
@@ -334,7 +334,7 @@ function checkTouchWords(){
       letter = word.word[l]
       if(word.direction == 'across'){
         if(!(table[word.first[0]][word.first[1]+l] == letter
-           || table[word.first[0]][word.first[1]+l] == 0
+           || table[word.first[0]][word.first[1]+l] === 0
            || table[word.first[0]][word.first[1]+l] == "#d")){
           abort = true
           //console.log('checkTouch: '+word.word+' char '+letter+' wrong position ')
@@ -342,7 +342,7 @@ function checkTouchWords(){
         }else
           table[word.first[0]][word.first[1]+l] = letter
       }else if(word.direction == 'down'){
-        if(!(table[word.first[0]+l][word.first[1]] == 0
+        if(!(table[word.first[0]+l][word.first[1]] === 0
           || table[word.first[0]+l][word.first[1]] == letter
           || table[word.first[0]+l][word.first[1]] == "#a")){
           abort = true
