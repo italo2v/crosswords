@@ -1,5 +1,7 @@
 # CrossWords
 
+Version 1.0.1 - Bug when generating random boards crossing spaces and letters fixed.
+
 This software was created to encourage students to study playing a crossword game.
 
 Features included:
