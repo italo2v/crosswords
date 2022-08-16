@@ -13,6 +13,7 @@ var datalanguage
 var close
 var myUser={}
 var systemConfig
+var version = '1.0.1'
 
 window.onload = () => {
 
@@ -569,7 +570,7 @@ function createMenu(){
         closePainels()
     })
     $('#about').click(function(){
-      message = $('<span/>').html(datalanguage['textabout']+'<br/><b>'+datalanguage['version']+': 1.0.0</b>')
+      message = $('<span/>').html(datalanguage['textabout']+'<br/><b>'+datalanguage['version']+': '+version+'</b>')
       box(datalanguage['about'], message)
     })
     $('#quit').click(function(){
