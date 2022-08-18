@@ -121,7 +121,7 @@ table, td, th {
     text-transform: uppercase;
 }
 #crosswords .game .grid table tbody tr td input.highlight {
-    background: #ffc;
+    background: #ff9;
 }
 #crosswords .game .grid table tbody tr td input:read-only {
     color: black;
@@ -165,7 +165,7 @@ ul, ol {
     margin: 0 0 18px;
 }
 font.highlight {
-    color: #ffc;
+    color: #ff9;
 }
 #crosswords .game .clues ul li {
     cursor: pointer;
@@ -173,7 +173,7 @@ font.highlight {
     padding: 1px 3px;
 }
 #crosswords .game .clues ul li.highlight {
-    background: #ffc;
+    background: #ff9;
     font-weight: 700;
 }
 #crosswords .game .clues ul li.tick{
