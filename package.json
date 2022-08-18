@@ -1,7 +1,7 @@
 {
   "name": "palavras-cruzadas",
-  "version": "1.0.1",
-  "description": "Jogo de palavras cruzadas com um dicionários de palavras usadas em sala com o objetivo de facilitar o aprendizado do aluno.",
+  "version": "1.0.2",
+  "description": "Jogo de palavras cruzadas com dicionários de palavras usadas em sala com o objetivo de facilitar o aprendizado do aluno.",
   "main": "main.js",
   "homepage": "https://github.com/italo2v/crosswords#readme",
   "bugs": {
