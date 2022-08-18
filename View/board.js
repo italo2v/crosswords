@@ -1,3 +1,5 @@
+//TODO: bloquear usuário de digitar espaço e traço no tabuleiro
+
 module.exports = {
   evaluation: {},
   highlighted: 0,
@@ -149,7 +151,7 @@ function addWords(board){
           }
         }else{
           //adding the input field
-          input = $('<input/>', {'type': 'text', 'maxlength': 1, 'class': 'letters', 'data-num': word.number}).appendTo($(`#cell-${row}-${col}`))
+          input = $('<input/>', {'type': 'text', 'maxlength': 1, 'class': 'lettersBoard', 'data-num': word.number}).appendTo($(`#cell-${row}-${col}`))
 
           /*if(word.level == 0)
             input.attr('style', 'background-color:green')
@@ -165,10 +167,10 @@ function addWords(board){
           }
           //skiping trace and space to fulfillment
           if(word.word[l-first] == '-'){
-            $(`#cell-${row}-${col} input`).val('-').attr('readonly', 'readonly').attr('disabled', 'disabled').attr('style', 'color:black;font-weight:bold;font-size:28px')
+            $(`#cell-${row}-${col} input`).val('-').attr('readonly', 'readonly').attr('disabled', 'disabled').attr('style', 'background-color:#464646;color:black;font-weight:bold;font-size:28px')
           }
           else if(word.word[l-first] == ' '){
-            $(`#cell-${row}-${col} input`).val(' ').attr('readonly', 'readonly').attr('disabled', 'disabled').attr('style', 'color:black;font-weight:bold;font-size:28px')
+            $(`#cell-${row}-${col} input`).val(' ').attr('readonly', 'readonly').attr('disabled', 'disabled').attr('style', 'background-color:#464646;color:black;font-weight:bold;font-size:28px')
           }
           input.mousedown(function(){
             //chaging to across or down highlight when click on input that cross words
@@ -192,7 +194,7 @@ function addWords(board){
             input.keyup(function(){
               cell = $(this).parent().attr('id').split('-')
               //changing to previus input on press backspace
-              key = event.keyCode || event.charCode;
+              key = event.keyCode || event.charCode
               if(key == 8 && !deleted){ //skip when delete using backspace
                 if($(this).val() == ''){
                   if($(`#cell-${cell[1]}-${parseInt(cell[2])-1} input`).hasClass('highlight'))

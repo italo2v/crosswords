@@ -13,7 +13,7 @@ var datalanguage
 var close
 var myUser={}
 var systemConfig
-var version = '1.0.1'
+var version = '1.0.2'
 
 window.onload = () => {
 
@@ -190,15 +190,18 @@ function translate(){
 }
 
 function setMask(){
+    $('input.lettersBoard').on('input', function() {
+        $(this).val( $(this).val().replace(/[^a-záàâãéèêíïóôõöúçñ]+$/i,'') );
+    })
     $('input.letters').on('input', function() {
         $(this).val( $(this).val().replace(/[^a-záàâãéèêíïóôõöúçñ -]+$/i,'') );
-    });
+    })
     $('input.lettersAndNumbers').on('input', function() {
         $(this).val( $(this).val().replace(/[^a-z0-9áàâãéèêíïóôõöúçñ -]+$/i,'') );
-    });
+    })
     $('input.Numbers').on('input', function() {
         $(this).val( $(this).val().replace(/[^0-9]/g,'') );
-    });
+    })
 }
 
 function buf2Base64(buffer) {
