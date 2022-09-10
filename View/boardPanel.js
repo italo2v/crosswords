@@ -1,3 +1,10 @@
+//TODO:
+//ao fechar tabuleiro ou sair do programa, salvar as palavras escritar para poder voltar a jogar posteriormente.
+
+//ao desistir de completar o tabuleiro, colocar a opção de exibir todas as palavras
+//reflexão: até que ponto o usuário é confiável e não vai usar este recurso para colar e se sabotar para tirar uma nota boa?
+//habilitar esta opção somente quando for registrar a nota no login do usuário?
+
 board = require('./board.js')
 
 module.exports = {
@@ -74,6 +81,10 @@ module.exports = {
   evaluate: () => {
     box(datalanguage['confirm'], datalanguage['askevaluate'], () => {
       board.getWords( (this_board) => {
+        for(w=this_board.words.length-1;w>0;w--)
+          if(typeof this_board.words[w].tick != undefined && this_board.words[w].tick == 'true')
+            this_board.words.splice(w, 1)
+
         ipcRenderer.send('evaluate-board', {"board": this_board, "evaluation": board.evaluation})
         ipcRenderer.once('evaluate-board', function(event, result){
           msg = result[0]
@@ -89,14 +100,23 @@ module.exports = {
           board.highlighted = 0
 
           //close if all words are correct
-          if(board.evaluation.correct_words.length == preview_board.total)
-            closePainels()
+          //if(board.evaluation.correct_words.length == preview_board.total)
+          //  closePainels()
 
           message = '<b>'+datalanguage['evaluationresult'].replace('{correct}', board.evaluation.correct_words.length).replace('{total}', preview_board.total)+'<br>'+datalanguage['score']
           +': '+board.evaluation.score+'</b><br/>'+datalanguage[msg]
           if(msg == 'tryagain' || msg == 'congratulations')
             box(datalanguage['evaluation'], message)
         })
+      })
+    })
+  },
+  save: (callback)=>{
+    board.getWords( (this_board)=>{
+      this_board.evaluation = board.evaluation
+      send('save-board', this_board, 'boardsaved', ()=>{
+        $('#box').remove()
+        callback()
       })
     })
   }
@@ -107,10 +127,10 @@ function showClasses(){
     classPanel.getClasses().then( (arvore) => {
       width = $('#boardPanel').width()/3
       arvore.items.forEach( (item) => {
-          div = $('<div/>', {'style': 'min-height:54px;margin-bottom:3px'}).attr('data-order', item.order).appendTo($('#items'))
-          $('<a/>', {'style': 'max-width:'+width+'px;white-space: pre-line'}).attr('class', 'btn btn-primary').attr('href', '#').text(item.num+'-'+item.name).attr('data-val', item.id).appendTo(div).click(function(){
-            showBoards($(this).attr('data-val'))
-          })
+        div = $('<div/>', {'style': 'min-height:54px;margin-bottom:3px'}).attr('data-order', item.order).appendTo($('#items'))
+        $('<a/>', {'style': 'max-width:'+width+'px;white-space: pre-line'}).attr('class', 'btn btn-primary').attr('href', '#').text(item.num+'-'+item.name).attr('data-val', item.id).appendTo(div).click(function(){
+          showBoards($(this).attr('data-val'))
+        })
       })
 
       //sorting classes
@@ -125,6 +145,17 @@ function showClasses(){
       $('<div/>', {'id': 'alertInfo'}).attr('class', 'alert alert-info').attr('style', 'font-weight: bold; text-align: center').html(datalanguage['selectclass']).appendTo($('#boardPanel'))
       createPages($('#items').children('div'), 'tableClasses')
       $('<input/>', {'id': 'pageClasses', 'type': 'hidden'}).val(1).appendTo($('#boardPanel'))
+      ipcRenderer.send('get-lastsavedboard', datalanguage['langLocale'])
+      ipcRenderer.once('get-lastsavedboard', (event, last_board) => {
+        total_words = last_board.across.length+last_board.down.length
+        if(typeof last_board.evaluation != 'undefined')
+          if(typeof last_board.evaluation.correct_words == 'undefined' || total_words > last_board.evaluation.correct_words.length){
+            box(datalanguage['confirm'], datalanguage['playlastboard'], function(){
+              playSaved(last_board)
+            })
+            $('#box .title').html($('#box .title').html().replace(datalanguage['confirm'], datalanguage['system']))
+          }
+      })
     })
 }
 
@@ -378,7 +409,7 @@ function showBoardFields(){
 
 //adding new fields to the creation panel for a new word
 function addWordToPanel(type, word){
-    w++;
+    w++
     if(word.number == 0){
       word.number = w
       preview_board[type].push(word)
@@ -431,7 +462,7 @@ function addWordToPanel(type, word){
         $('.tr-'+num).remove()
         index = preview_board[type].findIndex(x => x.number === num)
         if(index > -1)
-          preview_board[type].splice(index, 1);
+          preview_board[type].splice(index, 1)
         board.previewBoard()
       })
     })
@@ -515,7 +546,7 @@ function loadBoard(name, type){
   ipcRenderer.once(conn, (event, this_board) => {
     this_board.total = this_board.across.length+this_board.down.length
     preview_board = this_board
-    preview_board['oldname'] = $("#board option:selected" ).text()
+    preview_board['oldname'] = $("#board option:selected").text()
     if(type == 'play'){
       board.previewBoard()
       board.showClues(preview_board)
@@ -542,4 +573,19 @@ function playRandom(conf){
       $('#boxLevel .title input').click()
     }
   })
+}
+
+function playSaved(this_board){
+  $('#boardPanel').remove()
+  $('#evaluate').show()
+  saved = this_board.saved
+  //delete this_board.saved
+  preview_board = this_board
+  board.previewBoard()
+  board.showClues(preview_board)
+  clueSize()
+  board.evaluation = this_board.evaluation
+  //delete this_board.evaluation
+  board.setWords(saved)
+  $('#box .title input').click()
 }

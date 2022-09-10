@@ -72,6 +72,7 @@
       "score": "Pontuação",
       "confirm": "Confirmar",
       "yes": "Sim",
+      "no": "Não",
       "tryagain": "Você ainda pode tentar acertar as palavras restantes valendo metade dos pontos!",
       "congratulations": "Parabéns",
       "authenticated": "Autenticado!",
@@ -193,7 +194,9 @@
       "selectfileexport": "Selecione o arquivo para exportar",
       "importclasserror": "Ocorreu algum erro ao importar uma classe!",
       "importboarderror": "Ocorreu algum erro ao importar um tabuleiro!",
-      "importdictionaryerror": "Ocorreu algum erro ao importar um dicionário!"
+      "importdictionaryerror": "Ocorreu algum erro ao importar um dicionário!",
+      "savingboarderror": "Ocorreu algum erro ao salvar o tabuleiro preenchido!",
+      "playlastboard": "O último tabuleiro não foi completamente preenchido. Deseja continuar?"
     }
   },
   {
@@ -269,6 +272,7 @@
       "score": "Score",
       "confirm": "Confirm",
       "yes": "Yes",
+      "no": "No",
       "tryagain": "You can still try to adjust the remaining words worthing half the points!",
       "congratulations": "Congratulations",
       "authenticated": "Authenticated!",
@@ -390,7 +394,9 @@
       "selectfileexport": "Select the file to export",
       "importclasserror": "An error has occurred when importing a class!",
       "importboarderror": "An error has occurred when importing a board!",
-      "importdictionaryerror": "An error has occurred when importing a dictionary!"
+      "importdictionaryerror": "An error has occurred when importing a dictionary!",
+      "savingboarderror": "An error has occurred when saving the filled board!",
+      "playlastboard": "The latest board played was not completed. Do you want to continue?"
     }
   }
 ]

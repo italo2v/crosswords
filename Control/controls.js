@@ -752,6 +752,43 @@ module.exports = {
             callback(result)
           })
         })
+  },
+  saveBoard: (obj, callback)=>{
+    board = obj.arg
+    board.board_id = board.id
+    delete board.id
+    db.registerSavedBoard(board, (err, res)=>{
+      if (err) throw err
+      if(res.insertedCount == 1)
+        callback('boardsaved')
+      else
+        callback('savingboarderror')
+    })
+  },
+  getLastSavedBoard: (language, callback)=>{
+    db.getSavedBoards( (err, boards)=>{
+      if (err) throw err
+      for(l=boards.length-1;l>=0;l--){
+        last_board = boards[l]
+        if(typeof last_board != 'undefined' && typeof last_board.locale != undefined && last_board.locale == language)
+          break
+      }
+      if(l >= 0)
+        if(last_board.name == '#random#')
+          module.exports.getRandomBoard(last_board.board_id, (randomBoard)=>{
+            randomBoard.saved = last_board.words
+            randomBoard.evaluation = last_board.evaluation
+            randomBoard = hideLetters(randomBoard)
+            callback(randomBoard)
+          })
+        else
+          module.exports.getBoard({"name": last_board.name, "locale": last_board.locale}, (dbBoard)=>{
+            dbBoard.saved = last_board.words
+            dbBoard.evaluation = last_board.evaluation
+            dbBoard = hideLetters(dbBoard)
+            callback(dbBoard)
+          })
+    })
   }
 }
 

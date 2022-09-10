@@ -11,6 +11,8 @@ listControls = [
   {listen: 'register-board', control: controls.registerBoard},
   {listen: 'delete-board', control: controls.deleteBoard},
   {listen: 'update-board', control: controls.updateBoard},
+  {listen: 'save-board', control: controls.saveBoard},
+  {listen: 'get-lastsavedboard', control: controls.getLastSavedBoard},
   {listen: 'list-boards', control: controls.listBoards},
   {listen: 'register-class', control: controls.registerClass},
   {listen: 'delete-class', control: controls.deleteClass},
@@ -28,7 +30,6 @@ listControls = [
   {listen: 'get-systemconfig', control: controls.getSystemConfig},
   {listen: 'update-systemconfig', control: controls.updateSystemConfig},
   {listen: 'change-adminpassword', control: controls.changeAdminPassword}
-
 ]
 
 
@@ -163,8 +164,8 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadFile('./View/index.html')
   mainWindow.webContents.on('did-finish-load', () => {
-    mainWindow.removeMenu()
-    mainWindow.setMenuBarVisibility(false)
+  mainWindow.removeMenu()
+  mainWindow.setMenuBarVisibility(false)
     controls.systemConfig.userDataPath = (app || remote.app).getPath('userData')
     controls.systemConfig.appPath = (app || remote.app).getAppPath()
     controls.getSystemConfig('', (config)=>{
@@ -182,10 +183,14 @@ function createWindow () {
   })
 
   // Open the DevTools.
+  devtools = new BrowserWindow()
+  mainWindow.webContents.setDevToolsWebContents(devtools.webContents)
+  mainWindow.webContents.openDevTools({ mode: 'detach' })
   //mainWindow.webContents.openDevTools()
 
 
 }
+app.commandLine.appendSwitch('disable-gpu-sandbox')
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.

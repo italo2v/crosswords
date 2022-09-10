@@ -1,11 +1,10 @@
-//TODO: bloquear usuário de digitar espaço e traço no tabuleiro
-
 module.exports = {
   evaluation: {},
   highlighted: 0,
   //show the board preview in the creation panel
   previewBoard: () => {
     module.exports.evaluation = {}
+    preview_board.total = preview_board.across.length+preview_board.down.length
     showBoard(preview_board)
     addWords(preview_board)
   },
@@ -16,26 +15,44 @@ module.exports = {
     this_words = []
     for(w=1;w<=preview_board.total;w++){
       letters = ''
-      tick = false
       $('#board input').each(function(){
           if($(this).data('num') == w || $(this).data('num2') == w){
             letter = $(this).val()
+            if(letter == '')
+              letter = '*'
             for(l=0;l<special_letters.length;l++){
               letter = letter.replace(special_letters[l], normal_letters[l])
             }
             letters += letter
           }
       })
+      this_word = {"number": w, "word": letters}
       $('.game .clues ul li').each(function(){
         if($(this).attr('class') == 'tick' && $(this).data('num') == w)
-          tick = true
+          this_word.tick = 'true'
       })
-      this_word = {"number": w, "word": letters}
-      if(!tick)
-        this_words.push(this_word)
+      this_words.push(this_word)
     }
     this_board = {"id": preview_board.id, "name": preview_board.name, "locale": preview_board.locale, "words": this_words}
     callback(this_board)
+  },
+  setWords: (words)=>{
+    words.forEach((word) => {
+      if(word.word.length > 0)
+        $('#board input').each(function(){
+            if($(this).data('num') == word.number || $(this).data('num2') == word.number){
+              if(word.word[0] != '*' && word.word[0] != ' ' && word.word[0] != '-')
+                $(this).val(word.word[0])
+              word.word = word.word.substring(1)
+            }
+        })
+      if(typeof word.tick != undefined && word.tick == 'true')
+        module.exports.highlight(word.number, 'tick')
+    })
+    //remove any highlighted word
+    $('#board tr input.highlight').attr('class', '')
+    $('.game .clues ul li.highlight').attr('class', '')
+    board.highlighted = 0
   },
   //showing clues to the game
   showClues: (board) => {
