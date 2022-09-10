@@ -38,12 +38,6 @@ window.onload = () => {
     updateSystemConfig()
   })
 
-  ipcRenderer.on('quit-save', (event)=>{
-    if($('#Function').html() == 'play' && !$('#boardPanel').html())
-      boardPanel.save()
-    ipcRenderer.send('quit-save')
-  })
-
   ipcRenderer.once('change-adminpassword', (event) =>{
     boxAdminPassword()
   })
