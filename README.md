@@ -4,7 +4,11 @@ Version 1.0.2
 - Bug when generating random boards crossing spaces and letters fixed.
 - Bug allowing spaces and traces when playing boards fixed.
 
+<<<<<<< HEAD
 Version 1.1.0
+=======
+Version 1.1
+>>>>>>> refs/remotes/origin/main
 - Ask confirmation on click the quit button when playing a board
 - Save the filled board when closing the board or quitting the app
 - User may play the latest board if it's not completed

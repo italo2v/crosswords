@@ -183,9 +183,15 @@ function createWindow () {
   })
 
   // Open the DevTools.
+<<<<<<< HEAD
   //devtools = new BrowserWindow()
   //mainWindow.webContents.setDevToolsWebContents(devtools.webContents)
   //mainWindow.webContents.openDevTools({ mode: 'detach' })
+=======
+  devtools = new BrowserWindow()
+  mainWindow.webContents.setDevToolsWebContents(devtools.webContents)
+  mainWindow.webContents.openDevTools({ mode: 'detach' })
+>>>>>>> refs/remotes/origin/main
   //mainWindow.webContents.openDevTools()
 
 
