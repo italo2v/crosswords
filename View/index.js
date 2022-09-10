@@ -13,7 +13,7 @@ var datalanguage
 var close
 var myUser={}
 var systemConfig
-var version = '1.0.2'
+var version = '1.1.0'
 
 window.onload = () => {
 
@@ -27,6 +27,12 @@ window.onload = () => {
     defaultMenu()
     translate()
     updateSystemConfig()
+  })
+
+  ipcRenderer.on('quit-save', (event)=>{
+    if($('#Function').html() == 'play' && !$('#boardPanel').html())
+      boardPanel.save()
+    ipcRenderer.send('quit-save')
   })
 
   ipcRenderer.once('change-adminpassword', (event) =>{
@@ -567,6 +573,7 @@ function createMenu(){
     $('#close').click(function(){
       if($('#Function').html() == 'play' && !$('#boardPanel').html())
         box(datalanguage['confirm'], datalanguage['askclose'], ()=> {
+          boardPanel.save( ()=>{})
           closePainels()
         })
       else
@@ -577,9 +584,16 @@ function createMenu(){
       box(datalanguage['about'], message)
     })
     $('#quit').click(function(){
-      ipcRenderer.send('quit')
+      if($('#Function').html() == 'play' && !$('#boardPanel').html())
+        box(datalanguage['confirm'], datalanguage['askclose'], ()=> {
+          boardPanel.save( ()=>{
+            ipcRenderer.send('quit')
+          })
+        })
+      else
+        ipcRenderer.send('quit')
     })
     listLanguages($('#systemLanguage ul'))
     defaultMenu()
-  });
+  })
 }

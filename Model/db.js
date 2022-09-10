@@ -115,6 +115,26 @@ module.exports = {
         }
       }], callback)
   },
+  registerSavedBoard: (board, callback) =>{
+    module.exports.mydb.connection('savedBoards', 'bulkWrite', [
+      {
+        insertOne: {
+          document: {
+            'board_id': board.board_id,
+            'locale': board.locale,
+            'name': board.name,
+            'words': board.words,
+            'evaluation': board.evaluation
+          }
+        }
+      }], callback)
+  },
+  deleteSavedBoard : (id, callback) => {
+    module.exports.mydb.connection('savedBoards', 'deleteOne', {"_id": id}, callback)
+  },
+  getSavedBoards : (callback) => {
+    module.exports.mydb.connection('savedBoards', 'find', {}, callback)
+  },
   getClass : (name, parent, locale, callback) => {
     module.exports.mydb.connection('classes', 'find', {"name": name, "parent": parent, "locale": locale}, callback)
   },
