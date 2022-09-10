@@ -183,9 +183,9 @@ function createWindow () {
   })
 
   // Open the DevTools.
-  devtools = new BrowserWindow()
-  mainWindow.webContents.setDevToolsWebContents(devtools.webContents)
-  mainWindow.webContents.openDevTools({ mode: 'detach' })
+  //devtools = new BrowserWindow()
+  //mainWindow.webContents.setDevToolsWebContents(devtools.webContents)
+  //mainWindow.webContents.openDevTools({ mode: 'detach' })
   //mainWindow.webContents.openDevTools()
 
 
