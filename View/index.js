@@ -22,9 +22,11 @@ window.onload = () => {
 
   ipcRenderer.on('check-saveboard', (event)=>{
     if($('#Function').html() == 'play' && !$('#boardPanel').html())
-        boardPanel.save( ()=>{
-          ipcRenderer.send('quitapp')
-        })
+      boardPanel.save( ()=>{
+        ipcRenderer.send('quitapp')
+      })
+    else
+      ipcRenderer.send('quitapp')
   })
 
   ipcRenderer.on('change-language', (event, lang) => {
