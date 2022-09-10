@@ -309,7 +309,7 @@
       "registergoogle": "Register using your Google account.",
       "logingoogle": "Log in using your Google account.",
       "invalidlogin": "Username or password is invalid!",
-      "evaluationresult": "You got {correct} word(s) right out of {correct}.",
+      "evaluationresult": "You got {correct} word(s) right out of {total}.",
       "evaluationunregistered": "An error occurred when registering the evaluation.",
       "evaluationundeleted": "An error occurred when updating the evaluation.",
       "page": "Page",

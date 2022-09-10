@@ -13,12 +13,19 @@ var datalanguage
 var close
 var myUser={}
 var systemConfig
-var version = '1.1.0'
+var version = '1.1.1'
 
 window.onload = () => {
 
   selected_menu = 0
   createMenu()
+
+  ipcRenderer.on('check-saveboard', (event)=>{
+    if($('#Function').html() == 'play' && !$('#boardPanel').html())
+        boardPanel.save( ()=>{
+          ipcRenderer.send('quitapp')
+        })
+  })
 
   ipcRenderer.on('change-language', (event, lang) => {
     closePainels()
@@ -177,7 +184,8 @@ function send(name, arg, ok, otherFn){
   ipcRenderer.once(name, (event, result) => {
     box(datalanguage['alert'], datalanguage[result])
     if(result == ok){
-      closePainels()
+      if(result != 'boardsaved')
+        closePainels()
       if(typeof otherFn != 'undefined')
         otherFn()
     }
@@ -259,7 +267,7 @@ function box(title, message, yesFunction){
       $('#lock').remove()
       yesFunction()
     })
-    $('<input/>', {'type': 'button', 'class': 'btn btn-primary', 'title': 'ESC'}).val(datalanguage['cancel']).appendTo($('#box .message')).click(function(){
+    $('<input/>', {'type': 'button', 'class': 'btn btn-primary no', 'title': 'ESC'}).val(datalanguage['cancel']).appendTo($('#box .message')).click(function(){
       $('#box').remove()
       $('#lock').remove()
     })
@@ -584,13 +592,13 @@ function createMenu(){
       box(datalanguage['about'], message)
     })
     $('#quit').click(function(){
-      if($('#Function').html() == 'play' && !$('#boardPanel').html())
+      /*if($('#Function').html() == 'play' && !$('#boardPanel').html())
         box(datalanguage['confirm'], datalanguage['askclose'], ()=> {
           boardPanel.save( ()=>{
             ipcRenderer.send('quit')
           })
         })
-      else
+      else*/
         ipcRenderer.send('quit')
     })
     listLanguages($('#systemLanguage ul'))

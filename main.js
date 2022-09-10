@@ -4,6 +4,7 @@ const path = require('path')
 const fs = require('fs')
 const controls = require('./Control/controls.js')
 const baseURL = 'http://localhost/'
+var my_datalanguage
 
 listControls = [
   {listen: 'load-board', control: controls.loadBoard},
@@ -46,6 +47,7 @@ ipcMain.on('change-language', (event, language) => {
   session.defaultSession.cookies.set(cookie)
   .then(()=>{
       getLanguage( (datalanguage) => {
+        my_datalanguage = datalanguage
         event.reply('change-language', datalanguage)
       })
   }, (error) => {
@@ -128,7 +130,10 @@ ipcMain.on('data-export', (event, obj) => {
 })
 
 ipcMain.on('quit', (event) => {
-  app.quit()
+  event.reply('check-saveboard')
+  ipcMain.once('quitapp', (event)=>{
+    app.quit()
+  })
 })
 
 function getLanguage(callback){
@@ -172,6 +177,7 @@ function createWindow () {
       config.userDataPath = controls.systemConfig.userDataPath
       controls.systemConfig = config
       getLanguage( (datalanguage) => {
+        my_datalanguage = datalanguage
         mainWindow.webContents.send('change-language', datalanguage)
         controls.getAdminPassword('', (passwd)=>{
           if(passwd == 'jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI='){ //'123456'
@@ -180,6 +186,18 @@ function createWindow () {
         })
       })
     })
+  })
+  mainWindow.on('close', function(e) {
+    mainWindow.webContents.send('check-saveboard')
+    const choice = require('electron').dialog.showMessageBoxSync(this,
+      {
+        type: 'question',
+        buttons: [my_datalanguage['yes'], my_datalanguage['no']],
+        title: my_datalanguage['confirm'],
+        message: my_datalanguage['askquit']
+      })
+    if (choice === 1)
+      e.preventDefault()
   })
 
   // Open the DevTools.

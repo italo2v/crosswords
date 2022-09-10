@@ -579,13 +579,11 @@ function playSaved(this_board){
   $('#boardPanel').remove()
   $('#evaluate').show()
   saved = this_board.saved
-  //delete this_board.saved
   preview_board = this_board
   board.previewBoard()
   board.showClues(preview_board)
   clueSize()
   board.evaluation = this_board.evaluation
-  //delete this_board.evaluation
   board.setWords(saved)
   $('#box .title input').click()
 }
