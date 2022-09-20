@@ -312,10 +312,10 @@ function clueSize(){
 function listLanguages(place, callback){
   ipcRenderer.send('list-languages')
   ipcRenderer.once('list-languages', function(event, languages){
-    if(place.attr('class').split(' ')[0] == 'dropdown-menu')
-      place.html('')
+    if(typeof place.attr('class') != 'undefined' && place.attr('class').split(' ')[0] == 'dropdown-menu')
+        place.html('')
     languages.forEach( (item) => {
-      if(place.attr('class').split(' ')[0] == 'dropdown-menu'){
+      if(typeof place.attr('class') != 'undefined' && place.attr('class').split(' ')[0] == 'dropdown-menu'){
         li = $('<li/>').appendTo(place)
         element = $('<a/>', {'href': '#', 'data-value': item.language}).text(item.name).appendTo(li)
         element.click(function(){
