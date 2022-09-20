@@ -10,6 +10,10 @@ Version 1.1.1
 - User may play the latest board if it's not completed
 - Bug fixed when saving board on closing app
 
+Version 1.1.2
+- Auto update language.json on config dir if the version was changed on update
+- Bugs fixed
+
 This software was created to encourage students to study playing a crossword game.
 
 Features included:
