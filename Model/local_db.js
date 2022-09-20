@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs')
+const crypto = require('crypto')
 
 module.exports = {
   connection: (collection, type, arg, callback, arg2)=>{
@@ -94,9 +95,34 @@ function aggregate(collection, arg, callback){
 
 function find(collection, type, arg, callback, arg2){
   this_path = path.join(module.exports.userDataPath, collection+'.json')
+  local_file = module.exports.appPath+'/db_crosswords/'+collection+'.json'
   try{
     fs.readFile(this_path, (error, data)=>{
       if(error == null){
+        if(collection === 'languages'){
+          local_file = module.exports.appPath+'/db_crosswords/'+collection+'.json'
+          this_checksum = crypto.createHash('sha256').update(JSON.stringify(JSON.parse(data))).digest('hex')
+          try{
+            fs.readFile(local_file, (err, local_data)=>{
+              if(err) throw err
+              local_checksum = crypto.createHash('sha256').update(JSON.stringify(JSON.parse(local_data))).digest('hex')
+              if(local_checksum != this_checksum){
+                defaults = JSON.parse(local_data)
+                fs.writeFile(this_path, JSON.stringify(defaults), (err)=>{
+                  if (err) throw err
+                  console.log('File created: '+path.join(module.exports.userDataPath, collection+'.json'))
+                  entries = get_entries(defaults, arg)
+                  if(type == 'find')
+                    callback(err, entries)
+                  else if(type == 'findOne')
+                    callback(err, entries[0])
+                })
+              }
+            })
+          }catch(error){
+            console.log(error)
+          }
+        }
         json = JSON.parse(data)
         entries = get_entries(json, arg, arg2)
         if(type == 'find')
@@ -104,8 +130,8 @@ function find(collection, type, arg, callback, arg2){
         else if(type == 'findOne')
           callback(error, entries[0])
       }else if(error.code === 'ENOENT'){
-        local_file = module.exports.appPath+'/db_crosswords/'+collection+'.json'
         try{
+          local_file = module.exports.appPath+'/db_crosswords/'+collection+'.json'
           fs.readFile(local_file, (err, data)=>{
             if(err) {
               defaults = []

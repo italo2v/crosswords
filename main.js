@@ -55,6 +55,14 @@ ipcMain.on('change-language', (event, language) => {
   })
 })
 
+ipcMain.on('check-adminpassword', (event)=>{
+  controls.getAdminPassword('', (passwd)=>{
+    if(passwd == 'jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI='){ //'123456'
+      event.reply('change-adminpassword')
+    }
+  })
+})
+
 ipcMain.on('login', (event, data) => {
   data = data.arg
   controls.getAdminPassword('', (adminpasswd)=>{
@@ -179,22 +187,21 @@ function createWindow () {
       getLanguage( (datalanguage) => {
         my_datalanguage = datalanguage
         mainWindow.webContents.send('change-language', datalanguage)
-        controls.getAdminPassword('', (passwd)=>{
-          if(passwd == 'jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI='){ //'123456'
-            mainWindow.webContents.send('change-adminpassword')
-          }
-        })
       })
     })
   })
   mainWindow.on('close', function(e) {
     mainWindow.webContents.send('check-saveboard')
+    yes = my_datalanguage['yes'] || 'yes'
+    no = my_datalanguage['no'] || 'no'
+    title = my_datalanguage['confirm'] || 'Confirm'
+    ask = my_datalanguage['askquit'] || 'Are you sure you want to quit?'
     const choice = require('electron').dialog.showMessageBoxSync(this,
       {
         type: 'question',
-        buttons: [my_datalanguage['yes'], my_datalanguage['no']],
-        title: my_datalanguage['confirm'],
-        message: my_datalanguage['askquit']
+        buttons: [yes, no],
+        title: title,
+        message: ask
       })
     if (choice === 1)
       e.preventDefault()

@@ -13,7 +13,7 @@ var datalanguage
 var close
 var myUser={}
 var systemConfig
-var version = '1.1.1'
+var version = '1.1.2'
 
 window.onload = () => {
 
@@ -35,7 +35,9 @@ window.onload = () => {
       datalanguage = lang
     defaultMenu()
     translate()
-    updateSystemConfig()
+    getSystemConfig()
+    listLanguages($('#systemLanguage ul'))
+    ipcRenderer.send('check-adminpassword')
   })
 
   ipcRenderer.once('change-adminpassword', (event) =>{
@@ -147,7 +149,7 @@ window.onload = () => {
 
 }
 
-function updateSystemConfig(){
+function getSystemConfig(){
   ipcRenderer.send('get-systemconfig', '')
   ipcRenderer.once('get-systemconfig', (event, config) => {
     systemConfig = config
@@ -310,8 +312,10 @@ function clueSize(){
 function listLanguages(place, callback){
   ipcRenderer.send('list-languages')
   ipcRenderer.once('list-languages', function(event, languages){
+    if(place.attr('class').split(' ')[0] == 'dropdown-menu')
+      place.html('')
     languages.forEach( (item) => {
-      if(place.attr('class') == 'dropdown-menu'){
+      if(place.attr('class').split(' ')[0] == 'dropdown-menu'){
         li = $('<li/>').appendTo(place)
         element = $('<a/>', {'href': '#', 'data-value': item.language}).text(item.name).appendTo(li)
         element.click(function(){
@@ -579,6 +583,7 @@ function createMenu(){
         box(datalanguage['confirm'], datalanguage['askclose'], ()=> {
           boardPanel.save( ()=>{})
           closePainels()
+          $('#lock').remove()
         })
       else
         closePainels()
@@ -597,7 +602,7 @@ function createMenu(){
       else*/
         ipcRenderer.send('quit')
     })
-    listLanguages($('#systemLanguage ul'))
     defaultMenu()
+    $('#systemLanguage ul').html('')
   })
 }

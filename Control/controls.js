@@ -6,8 +6,10 @@ module.exports = {
   getDbConfig: (callback)=>{
     this_db = db.mydb
     db.mydb = db.local_db
-    db.local_db.userDataPath = module.exports.systemConfig.userDataPath
-    db.local_db.appPath = module.exports.systemConfig.appPath
+    if(typeof module.exports.systemConfig.userDataPath != 'undefined')
+      db.local_db.userDataPath = module.exports.systemConfig.userDataPath
+    if(typeof module.exports.systemConfig.appPath != 'undefined')
+      db.local_db.appPath = module.exports.systemConfig.appPath
     db.getSystemConfig( (err, config) => {
       if (err) throw err;
       mongoconf = config[0].mongo_db
