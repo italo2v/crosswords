@@ -51,7 +51,7 @@ module.exports = {
       testPassword(this_config, (conf) => {
         send('update-systemconfig', conf, 'configupdated', () => {
           closePainels()
-          updateSystemConfig()
+          getSystemConfig()
           if(typeof this_config.mongo_db != 'undefined' &&
           typeof systemConfig.mongo_db != 'undefined' &&
           (systemConfig.mongo_db.host != this_config.mongo_db.host
