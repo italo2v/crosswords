@@ -6,14 +6,16 @@
   "homepage": "https://github.com/italo2v/crosswords#readme",
   "bugs": {
     "url": "https://github.com/italo2v/crosswords/issues",
-    "email": "italocruzicb@gmail.com.com"
+    "email": "italocruzicb@gmail.com"
   },
   "scripts": {
     "start": "electron .",
     "package-mac": "electron-packager . CrossWords --overwrite --platform=darwin --arch=x64 --icon=crossword.icns --prune=true --out=release-builds",
-    "package-win": "electron-packager . CrossWords --overwrite --asar=true --platform=win32 --arch=ia32 --icon=crossword.icns --prune=true --out=release-builds",
-    "package-win64": "electron-packager . CrossWords --overwrite --asar=true --platform=win32 --arch=x64 --icon=crossword.icns --prune=true --out=release-builds",
-    "package-linux": "electron-packager . CrossWords --overwrite --asar=true --platform=linux --arch=x64 --icon=crossword.icns --prune=true --out=release-builds"
+    "package-win32": "electron-builder build --win --ia32",
+    "package-win64": "electron-builder build --win --x64",
+    "package-linux": "electron-builder build --linux",
+    "package-linux2": "electron-builder build --linux deb rpm",
+    "package-all": "electron-builder build --win --ia32;mv dist/Palavras\\ Cruzadas\\ Setup\\ 1.1.2.exe dist/Palavras\\ Cruzadas\\ Setup\\ 1.1.2-32bits.exe;electron-builder build --win --x64;mv dist/Palavras\\ Cruzadas\\ Setup\\ 1.1.2.exe dist/Palavras\\ Cruzadas\\ Setup\\ 1.1.2-64bits.exe;electron-builder build --linux;electron-builder build --linux deb rpm"
   },
   "author": "Italo Cruz de Brito, Roberto Irineu, Saul Mizrahi <italocruzicb@gmail.com> (https://github.com/italo2v/crosswords)",
   "license": "MIT",
