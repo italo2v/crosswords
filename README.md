@@ -14,6 +14,11 @@ Version 1.1.2
 - Auto update language.json on config dir if the version was changed on update
 - Bugs fixed
 
+Version 1.2.0
+- Change cursor to first clear field of the word when clicking in the clue
+- Allow to upload a image in the clue dictionary
+- Show the image as a Hint int the clue
+
 This software was created to encourage students to study playing a crossword game.
 
 Features included:
