@@ -13,7 +13,7 @@ var datalanguage
 var close
 var myUser={}
 var systemConfig
-var version = '1.1.3'
+var version = '1.1.2'
 
 window.onload = () => {
 
