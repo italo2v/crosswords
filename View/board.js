@@ -77,6 +77,14 @@ module.exports = {
           if(!$(this).attr('class') || $(this).attr('class') == ''){
             module.exports.highlight(module.exports.highlighted, '')
             module.exports.highlight($(this).data('num'), 'highlight')
+            inputs = $('#board input.highlight')
+            for(i=0;i<=inputs.length-1;i++){
+              input = $(inputs[i])
+              if((input.attr('data-num') == word.number || input.attr('data-num2') == word.number) && (input.val() == '' || i == inputs.length-1)){
+                input.focus()
+                break
+              }
+            }
           }
         })
       })

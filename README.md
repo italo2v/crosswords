@@ -14,6 +14,10 @@ Version 1.1.2
 - Auto update language.json on config dir if the version was changed on update
 - Bugs fixed
 
+Version 1.1.3
+- Change cursor to first clear field of the word when clicking in the clue
+- Bug fixed when saving played board language
+
 This software was created to encourage students to study playing a crossword game.
 
 Features included:

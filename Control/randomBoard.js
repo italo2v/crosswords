@@ -16,7 +16,7 @@ module.exports = {
         "level": level,
         "width": boardConfig.random_cols,
         "height": boardConfig.random_rows,
-        "locale": datalanguage['langLocale'],
+        "locale": "",
         "across": [],
         "down": []
       }

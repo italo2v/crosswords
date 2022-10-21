@@ -48,6 +48,7 @@ ipcMain.on('change-language', (event, language) => {
   .then(()=>{
       getLanguage( (datalanguage) => {
         my_datalanguage = datalanguage
+        controls.systemConfig.langLocale = my_datalanguage['langLocale']
         event.reply('change-language', datalanguage)
       })
   }, (error) => {
@@ -186,6 +187,7 @@ function createWindow () {
       controls.systemConfig = config
       getLanguage( (datalanguage) => {
         my_datalanguage = datalanguage
+        controls.systemConfig.langLocale = my_datalanguage['langLocale']
         mainWindow.webContents.send('change-language', datalanguage)
       })
     })

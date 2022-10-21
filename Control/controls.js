@@ -710,6 +710,7 @@ module.exports = {
 
       board = randomBoard.generate(dictionary, conf.level, module.exports.systemConfig.board_config)
       board.class = conf.class
+      board.locale = module.exports.systemConfig.langLocale
       if(board.across.length == 0 || board.down.length == 0)
         callback('insuficientwords')
       else
